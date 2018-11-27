@@ -52,6 +52,14 @@ public class BTreeNode {
 		keys[index] = object;
 	}
 	/**
+	 * returns a single object from the node
+	 * @param index
+	 * @return
+	 */
+	public TreeObject getSingleObject(int index) {
+		return keys[index];
+	}
+	/**
 	 * shifts the objects in the node to put a smaller object in its place
 	 * @param index
 	 * @param node
