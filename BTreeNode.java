@@ -43,7 +43,24 @@ public class BTreeNode {
 	public void setObjects(TreeObject[] objects) {
 		this.keys = objects;
 	}
-
+	/**
+	 * sets a single object in the node
+	 * @param index
+	 * @param object
+	 */
+	public void setSingleObject(int index,TreeObject object) {
+		keys[index] = object;
+	}
+	/**
+	 * shifts the objects in the node to put a smaller object in its place
+	 * @param index
+	 * @param node
+	 */
+	public void shift(int index, BTreeNode node) {
+		for(int i = index; i < getNumOfObjects(); i++) {
+			keys[index]= keys[index+1];
+		}
+	}
 	/**
 	 * Get a pointer
 	 * @return pointer
@@ -86,7 +103,13 @@ public class BTreeNode {
 	{
 		return numOfObjects;
 	}
-
+	/**
+	 * get the max number of objects the node can hold
+	 * @return
+	 */
+	public int getMaxNum() {
+		return maxNum;
+	}
 	/**
 	 * Set the number of object to the given value
 	 * @param numOfObjects
