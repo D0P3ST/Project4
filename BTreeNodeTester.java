@@ -85,6 +85,7 @@ public class BTreeNodeTester {
 		} else {
 			System.out.println("Test Failed" + practiceNode.toString());
 		}
+		System.out.println("The node after all test: " + practiceNode.toString());
 		// total number of tests
 		System.out.println('\n' + "Test taken: " + numTest + " Test Passed: " + testPassed + " Percent: "
 				+ (double) testPassed / numTest);
