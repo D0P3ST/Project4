@@ -10,6 +10,7 @@ public class BTreeNode {
 	public boolean isLeaf; 
 	private int numOfObjects; 
 	private int maxNum;
+	private int degree;
 
 	/**
 	 * 
@@ -17,6 +18,7 @@ public class BTreeNode {
 	 * @param degree(utilize all the capacity in each node [optimal t degree])
 	 */
 	public BTreeNode(int degree) {
+		this.degree=degree;
 		this.maxNum=degree*2-1;
 		this.keys = new TreeObject[degree*2-1];// maximum key = 2*degree -1
 		// Create a list of Tree Objects
@@ -26,8 +28,57 @@ public class BTreeNode {
 		this.pointers = new int[degree*2]; // A list of pointers with the parent pointer is 4 bytes
 		this.isLeaf = true; // every new created node is a leaf
 		this.numOfObjects = 0;// the number of objects in each node
+		
 	}
-
+	
+	/**
+	 * Check if we are at t-1 number of objects in the node
+	 * @return true if the number of nodes is equal to degree -1
+	 */
+	public boolean delCond() {
+		return(numOfObjects==(degree-1));
+	}
+	
+	/**
+	* Add the node in the BtreeNode
+	*@param TreeObject
+	*/
+	public void addNode(TreeObject insert){
+		if(!isFull()){
+		return;
+		}
+		else{
+		keys[numObjects]=insert;
+		numObjects++;
+		}
+	}
+	
+	/**
+	* Remove the node in the BtreeNode
+	*@return a deleted TreeObject
+	*@param the deleted node
+	*/
+	public TreeObject removeNode(TreeObject del){
+	if(!isEmpty()){
+		return;
+	}
+	else{
+		int check=0;
+		TreeObject retVal;
+		while(check<numObjects&&!keys[check].equals(del)){
+		check++;
+		}
+		retVal = keys[check];
+		numObjects--;
+		for(int i=check;i<numObjects;i++){
+		keys[i]=keys[i+1];
+		{
+		keys[numObjects]=null;
+		return retVal;
+	    }
+	
+	}
+	
 	/**
 	 * Get an object from TreeObject class
 	 * @return objects
@@ -133,7 +184,13 @@ public class BTreeNode {
 	public boolean isFull() {
 		return(numOfObjects==maxNum);
 	}
-
+	/**
+	 * Check if the node is empty
+	 * @return true if the node is empty
+	 */
+	public boolean isEmpty() {
+		return(numOfObjects==0);
+	}
 	/** Overwrite the toString method
 	 * Return the string to print out
 	 */
