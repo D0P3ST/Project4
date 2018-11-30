@@ -108,8 +108,36 @@ public class BTreeNodeTester {
 			System.out.println("Test Passed" + '\n');
 			testPassed++;
 		} else {
-			System.out.println("Test failed" + '\n');
+			System.out.println("Test Failed" + '\n');
 		}
+		
+		numTest++;
+		// test setObject
+		if(testSetObjects(practiceNode, 0, "setObjects") == true) {
+			System.out.println("Test Passed" + '\n');
+			testPassed++;
+		} else {
+			System.out.println("Test Failed" + '\n');
+		}
+		
+		numTest++;
+		// test setSingleObject & getSingleObjects
+		if(testSetandGetSingleObject(practiceNode, 0, "setSingleObject and getSingleObject") == true) {
+			System.out.println("Test Passed" + '\n');
+			testPassed++;
+		} else {
+			System.out.println("Test Failed" + '\n');
+		}
+		
+		numTest++;
+		// test setSingleObject & getSingleObjects
+		if(testSetandGetPointers(practiceNode, 0, "setPointers and getPointers") == true) {
+			System.out.println("Test Passed" + '\n');
+			testPassed++;
+		} else {
+			System.out.println("Test Failed" + '\n');
+		}
+		
 		
 		//shows the node after the tests
 		System.out.println("The node after all test: " + practiceNode.toString());
@@ -152,6 +180,77 @@ public class BTreeNodeTester {
 			return true;
 		} else {
 			System.out.println("Object not found");
+			return false;
+		}
+	}
+	
+	/**
+	 * sets a single object in the node & returns a single object from the node
+	 * @param practiceNode
+	 * @param key
+	 * @param testName
+	 * @return
+	 */
+	static boolean testSetandGetSingleObject(BTreeNode practiceNode, long key, String testName) {
+		TreeObject practiceObject = new TreeObject(key);
+		System.out.println("Test setSingleObject and getSingleObject : " + testName);
+		int index = (int) key;
+		practiceNode.setSingleObject(index, practiceObject);
+		if(practiceNode.getSingleObject(index).equals(practiceObject)) {
+			return true;
+		} else {
+			System.out.println("Object not properly set.");
+			return false;
+		}
+	}
+	
+	/**
+	 * Set object to the given value 
+	 * @param practiceNode
+	 * @param key
+	 * @param testName
+	 * @return
+	 */
+	static boolean testSetObjects(BTreeNode practiceNode, long key, String testName) {
+		TreeObject practiceObject = new TreeObject(key);
+		TreeObject practiceObjectArray[] = new TreeObject[(int) key];
+		int compare = 0;
+		for (int i = 0; i <= practiceObjectArray.length; i++) {
+			practiceObjectArray[i].setKey(practiceObject.getKey());
+			practiceObjectArray[i].setFrequency(practiceObject.getFrequency());
+		}
+		System.out.println("Test setObjects : " + testName);
+		practiceNode.setObjects(practiceObjectArray);
+		for (int i = 0; i <= practiceObjectArray.length; i++) {
+			if(practiceNode.getSingleObject(i).equals(practiceObjectArray[i])){
+				compare++;
+			}
+		}
+			if(compare == practiceObjectArray.length){
+			return true;
+	
+		} else {
+			System.out.println("setObjects failed");
+			return false;
+		}
+	}
+	
+	/**
+	 * Set pointers to the given value & returns that pointer
+	 * @param practiceNode
+	 * @param key
+	 * @param testName
+	 * @return
+	 */
+	static boolean testSetandGetPointers(BTreeNode practiceNode, long key, String testName) {
+		System.out.println("Test setSingleObject : " + testName);
+		int index = (int) key;
+		int[] pointers = new int[index];
+		practiceNode.setPointers(pointers);
+		if(practiceNode.getPointers() == pointers) {
+			return true;
+		} else {
+			System.out.println("Object not properly set.");
 			return false;
 		}
 	}
