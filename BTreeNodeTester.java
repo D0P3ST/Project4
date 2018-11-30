@@ -1,4 +1,3 @@
-
 public class BTreeNodeTester {
 
 	public static void main(String[] args) {
@@ -39,6 +38,7 @@ public class BTreeNodeTester {
 		practiceNode.setPointers(pointers);
 		System.out.println("test input: " + practiceNode.toString());
 		System.out.println('\n' + "Test max number");
+
 		numTest++;
 		// Test insert full node
 		if (practiceNode.getMaxNum() == degree * 2 - 1) {
@@ -48,7 +48,8 @@ public class BTreeNodeTester {
 			System.out.println("Test failed");
 		}
 		System.out.println("Test full input: ");
-		practiceObject = new TreeObject(1);
+		practiceObject = new TreeObject(0);
+
 		numTest++;
 		// Test input into a full node. should throw exception.
 		try {
@@ -59,6 +60,8 @@ public class BTreeNodeTester {
 			System.out.println("Test passed " + '\n');
 			testPassed++;
 		}
+
+		// test remove first
 		System.out.println("Test remove first");
 		numTest++;
 		try {
@@ -69,6 +72,7 @@ public class BTreeNodeTester {
 		} catch (Exception e) {
 			System.out.println("Test Failed" + '\n');
 		}
+
 		// add a number
 		numTest++;
 		if (testNumberInsert(practiceNode, 15, "15") == true) {
@@ -77,20 +81,50 @@ public class BTreeNodeTester {
 		} else {
 			System.out.println("Test Failed");
 		}
-		//remove last
+
+		// remove last
 		numTest++;
-		if (testNumberRemove(practiceNode, practiceNode.getSingleObject(practiceNode.getMaxNum()-2).getKey(), "Remove Last") == true) {
+		if (testNumberRemove(practiceNode, practiceNode.getSingleObject(practiceNode.getMaxNum()-1).getKey(), "Remove Last") == true) {
 			System.out.println("Test Passed ");
 			testPassed++;
 		} else {
 			System.out.println("Test Failed" + practiceNode.toString());
 		}
+		
+		//test remove 2
+		numTest++;
+		if (testNumberRemove(practiceNode, 2, "Remove 2") == true) {
+			System.out.println("Test Passed ");
+			testPassed++;
+		} else {
+			System.out.println("Test Failed" + practiceNode.toString());
+		}
+
+		numTest++;
+		// test the get key method from object
+		System.out.println("Test get Key from object class");
+		practiceObject = new TreeObject(15);
+		if (practiceObject.getKey() == 15) {
+			System.out.println("Test Passed" + '\n');
+			testPassed++;
+		} else {
+			System.out.println("Test failed" + '\n');
+		}
+		
+		//shows the node after the tests
 		System.out.println("The node after all test: " + practiceNode.toString());
-		// total number of tests
+		
+		// total number of tests + results of test
 		System.out.println('\n' + "Test taken: " + numTest + " Test Passed: " + testPassed + " Percent: "
 				+ (double) testPassed / numTest);
 	}
-
+	/**
+	 * inserts an object from the node with the specified key
+	 * @param practiceNode
+	 * @param key
+	 * @param testName
+	 * @return
+	 */
 	static boolean testNumberInsert(BTreeNode practiceNode, long key, String testName) {
 		TreeObject practiceObject = new TreeObject(key);
 		System.out.println("Test Insert : " + testName);
@@ -103,7 +137,13 @@ public class BTreeNodeTester {
 			return false;
 		}
 	}
-
+	/**
+	 * removes an object from the node with the specified key
+	 * @param practiceNode
+	 * @param key
+	 * @param testName
+	 * @return
+	 */
 	static boolean testNumberRemove(BTreeNode practiceNode, long key, String testName) {
 		TreeObject practiceObject = new TreeObject(key);
 		System.out.println("Test remove : " + testName);
