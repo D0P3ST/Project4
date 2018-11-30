@@ -53,7 +53,6 @@ public class BTreeNode {
 		if (isFull()) {
 			throw new Exception();
 		} else {
-			System.out.println(numOfObjects);
 			keys[numOfObjects] = insert;
 			numOfObjects++;
 		}
@@ -70,22 +69,19 @@ public class BTreeNode {
 			return null;
 		} else {
 			int check = 0;
-			TreeObject retVal;
+			TreeObject retVal = null;
 			while (check < numOfObjects && !keys[check].equals(del)) {
 				check++;
 			}
 			retVal = keys[check];
 			numOfObjects--;
 			for (int i = check; i < numOfObjects; i++) {
-				keys[i] = keys[i + 1];
-				{
-					keys[numOfObjects] = null;
-					return retVal;
-				}
+				keys[i] = keys[i + 1];			
 			}
+			
+				keys[numOfObjects] = null;
+				return retVal;	
 		}
-		return null;
-
 	}
 
 	/**
@@ -224,7 +220,7 @@ public class BTreeNode {
 	 */
 	@Override
 	public String toString() {
-		return "BTreeNode [objects=" + Arrays.toString(keys) + ", pointers=" + Arrays.toString(pointers) + ", isLeaf="
+		return "BTreeNode [objects=" + '\n' + Arrays.toString(keys) + ", pointers=" + Arrays.toString(pointers) + ", isLeaf="
 				+ isLeaf + ", numOfObjects=" + numOfObjects + "]";
 	}
 }
