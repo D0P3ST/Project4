@@ -1,4 +1,3 @@
-
 import java.util.Arrays;
 
 /**
@@ -7,13 +6,13 @@ import java.util.Arrays;
  */
 public class BTreeNode {
 
-	public TreeObject keys[];
+	public TreeObject objects[];
 	public int pointers[];
 	public boolean isLeaf;
 	private int numOfObjects;
 	private int maxNum;
 	private int degree;
-
+	private int position;
 	/**
 	 * 
 	 * Basic a constructor to create a B- Tree Node
@@ -23,15 +22,15 @@ public class BTreeNode {
 	public BTreeNode(int degree) {
 		this.degree = degree;
 		this.maxNum = degree * 2 - 1;
-		this.keys = new TreeObject[degree * 2 - 1];// maximum key = 2*degree -1
+		this.objects = new TreeObject[degree * 2 - 1];// maximum key = 2*degree -1
 		// Create a list of Tree Objects
 		for (int i = 0; i < (degree * 2 - 1); i++) {
-			this.keys[i] = new TreeObject(0);
+			this.objects[i] = new TreeObject(0);
 		}
 		this.pointers = new int[degree * 2]; // A list of pointers with the parent pointer is 4 bytes
 		this.isLeaf = true; // every new created node is a leaf
 		this.numOfObjects = 0;// the number of objects in each node
-
+		this.position=0;
 	}
 
 	/**
@@ -53,7 +52,7 @@ public class BTreeNode {
 		if (isFull()) {
 			throw new Exception();
 		} else {
-			keys[numOfObjects] = insert;
+			objects[numOfObjects] = insert;
 			numOfObjects++;
 		}
 	}
@@ -70,16 +69,16 @@ public class BTreeNode {
 		} else {
 			int check = 0;
 			TreeObject retVal = null;
-			while (check < numOfObjects && !keys[check].equals(del)) {
+			while (check < numOfObjects && !objects[check].equals(del)) {
 				check++;
 			}
-			retVal = keys[check];
+			retVal = objects[check];
 			numOfObjects--;
 			for (int i = check; i < numOfObjects; i++) {
-				keys[i] = keys[i + 1];			
+				objects[i] = objects[i + 1];			
 			}
 			
-				keys[numOfObjects] = null;
+				objects[numOfObjects] = null;
 				return retVal;	
 		}
 	}
@@ -89,8 +88,8 @@ public class BTreeNode {
 	 * 
 	 * @return objects
 	 */
-	public TreeObject[] getKeys() {
-		return keys;
+	public TreeObject[] getObjects() {
+		return objects;
 	}
 
 	/**
@@ -99,7 +98,7 @@ public class BTreeNode {
 	 * @param objects
 	 */
 	public void setObjects(TreeObject[] objects) {
-		this.keys = objects;
+		this.objects = objects;
 	}
 
 	/**
@@ -109,7 +108,7 @@ public class BTreeNode {
 	 * @param object
 	 */
 	public void setSingleObject(int index, TreeObject object) {
-		keys[index] = object;
+		objects[index] = object;
 	}
 
 	/**
@@ -119,7 +118,7 @@ public class BTreeNode {
 	 * @return
 	 */
 	public TreeObject getSingleObject(int index) {
-		return keys[index];
+		return objects[index];
 	}
 
 	/**
@@ -130,7 +129,7 @@ public class BTreeNode {
 	 */
 	public void shift(int index, BTreeNode node) {
 		for (int i = index; i < getNumOfObjects(); i++) {
-			keys[index] = keys[index + 1];
+			objects[index] = objects[index + 1];
 		}
 	}
 
@@ -214,13 +213,28 @@ public class BTreeNode {
 	public boolean isEmpty() {
 		return (numOfObjects == 0);
 	}
+	/**
+	 * Get a position
+	 * @return position
+	 */
+	public int getPosition() {
+		return position;
+	}
 
+	/**
+	 * Set the position to the given value
+	 * @param position
+	 */
+	public void setPosition(int position) {
+		this.position = position;
+	}
+	
 	/**
 	 * Overwrite the toString method Return the string to print out
 	 */
 	@Override
 	public String toString() {
-		return "BTreeNode [objects=" + '\n' + Arrays.toString(keys) + ", pointers=" + Arrays.toString(pointers) + ", isLeaf="
-				+ isLeaf + ", numOfObjects=" + numOfObjects + "]";
+		return "BTreeNode [objects=" + '\n' + Arrays.toString(objects) + ", pointers=" + Arrays.toString(pointers) + ", isLeaf="
+				+ isLeaf + ", numOfObjects=" + numOfObjects + position+"= + position ]";
 	}
 }
