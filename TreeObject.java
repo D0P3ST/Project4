@@ -38,7 +38,14 @@ public class TreeObject  implements Comparable<TreeObject> {
 	public int getFrequency() {
 		return frequency;
 	}
-
+	/**
+	 * To increase the frequency of a tree object
+	 * @return frequency
+	 */
+	public void incFrequency() {
+		frequency++;
+	}
+	
 	/**
 	 * Set frequency to the given value
 	 * @param frequency
