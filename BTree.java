@@ -112,7 +112,7 @@ public class BTree {
 	 */
 	public void diskWrite(BTreeNode node) throws IOException
 	{
-		// Position | isLeaf | NumofObjects | location of child pointers
+		// isLeaf | NumofObjects | location of child pointers
 		//So when we read the position, we just need to readBoolean and readInt 
 		file.seek(node.getPosition()); 
 		file.writeBoolean(node.isLeaf);
