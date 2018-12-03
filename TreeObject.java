@@ -4,7 +4,7 @@
 public class TreeObject  implements Comparable<TreeObject> {
 	private long key;
 	private int frequency; 
-	
+	private boolean exist;
 	/**
 	 * Constructor to create a Tree Object 
 	 * @param key
@@ -13,8 +13,15 @@ public class TreeObject  implements Comparable<TreeObject> {
 	public TreeObject(long key) {
 		this.key = key;
 		this.frequency = 1; // 0 if not found
+		this.exist=true;
 	}
-
+	public boolean isExist(){
+	return exist;
+	}
+	public void setExist(boolean status){
+	exist=status;	
+	}
+	
 	/**
 	 * Get a key
 	 * @return key
