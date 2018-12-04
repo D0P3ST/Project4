@@ -74,10 +74,10 @@ public class GeneBankSearch {
 				String binaryString = gbc.convertLongToString(q, sequencelen);
 				TreeObject result = tree.search(tree.getRoot(), q);
 				
-				if(result != null) 
+				if(result != null) {
 					lineNum++;
-			System.out.println("Seq"+ lineNum+"  "+gbc.convertLongToString(result.getData(), Integer.parseInt(sequence))+": "+ result.getFrequency());
-					
+			System.out.println("Seq"+ lineNum+"  "+gbc.convertLongToString(result.getData(), Integer.parseInt(sequence))+":"+ result.getFrequency());
+				}
 			}
 			//the process end
 			long endTime = System.currentTimeMillis();
