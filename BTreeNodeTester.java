@@ -122,7 +122,7 @@ public class BTreeNodeTester {
 		
 		numTest++;
 		// test setSingleObject & getSingleObjects
-		if(testSetandGetSingleObject(practiceNode, 0, "setSingleObject and getSingleObject") == true) {
+		if(testSetandGetSingleObject(practiceNode, 1, "setSingleObject and getSingleObject") == true) {
 			System.out.println("Test Passed" + '\n');
 			testPassed++;
 		} else {
@@ -131,7 +131,7 @@ public class BTreeNodeTester {
 		
 		numTest++;
 		// test setSingleObject & getSingleObjects
-		if(testSetandGetPointers(practiceNode, 0, "setPointers and getPointers") == true) {
+		if(testSetandGetPointers(practiceNode, 1, "setPointers and getPointers") == true) {
 			System.out.println("Test Passed" + '\n');
 			testPassed++;
 		} else {
@@ -215,13 +215,13 @@ public class BTreeNodeTester {
 		TreeObject practiceObject = new TreeObject(key);
 		TreeObject practiceObjectArray[] = new TreeObject[(int) key];
 		int compare = 0;
-		for (int i = 0; i <= practiceObjectArray.length; i++) {
+		for (int i = 1; i <= practiceObjectArray.length; i++) {
 			practiceObjectArray[i].setKey(practiceObject.getKey());
 			practiceObjectArray[i].setFrequency(practiceObject.getFrequency());
 		}
 		System.out.println("Test setObjects : " + testName);
 		practiceNode.setObjects(practiceObjectArray);
-		for (int i = 0; i <= practiceObjectArray.length; i++) {
+		for (int i = 1; i <= practiceObjectArray.length; i++) {
 			if(practiceNode.getSingleObject(i).equals(practiceObjectArray[i])){
 				compare++;
 			}
@@ -251,6 +251,24 @@ public class BTreeNodeTester {
 			return true;
 		} else {
 			System.out.println("Object not properly set.");
+			return false;
+		}
+	}
+	
+	/**
+	 * Get a isLeaf and Set isLeaf to the given value
+	 * @param practiceNode
+	 * @param key
+	 * @param testName
+	 * @return
+	 */
+	static boolean testIsandSetIsLeaf(BTreeNode practiceNode, long key, String testName) {
+		System.out.println("Test testIsandSetIsLeaf : " + testName);
+		practiceNode.setIsLeaf(true);
+		if(practiceNode.isLeaf) {
+			return true;
+		} else {
+			System.out.println("Object not properly set to isLeaf.");
 			return false;
 		}
 	}
