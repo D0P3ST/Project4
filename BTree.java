@@ -440,6 +440,40 @@ public class BTree {
 			}
 		}
 	}
+	/**
+	 * This search method is saving frequency data to the disk
+	 * @param node
+	 * @param key
+	 * @return TreeObject
+	 * @throws IOException
+	 */
+	private BTreeNode bTreeSearchforDelete(BTreeNode node, TreeObject key) throws IOException
+	{
+		int i = 0;//in the book they start from 1 but our array starts from 0
+		BTreeNode childNode=null;
+
+		while( i < node.getNumOfObjects() && key.getKey() > node.objects[i].getKey()) 
+		{
+			i = i + 1;
+		}
+		if( i < node.getNumOfObjects() && key.getKey() == node.objects[i].getKey())
+		{
+
+
+			return node; 
+		}
+		else if(node.isLeaf) 
+		{
+			return null;
+		}
+		else 
+		{
+			parentNode=childNode;
+			childNode = diskRead(node.pointers[i]);
+			return bTreeSearchforDelete(childNode, key);
+		}
+	}
+
 	public void delete(TreeObject object) throws IOException {
 		TreeObject retVal =null;// The object that needs to be deleted
 		BTreeNode del=null; // The node that contains the deleted object
