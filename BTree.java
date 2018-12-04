@@ -440,6 +440,97 @@ public class BTree {
 			}
 		}
 	}
+	public void delete(TreeObject object) throws IOException {
+		TreeObject retVal =null;// The object that needs to be deleted
+		BTreeNode del=null; // The node that contains the deleted object
+		BTreeNode node= root;
+		retVal = bTreeSearch(node,object);
+
+		System.out.println(retVal.getKey());
+		del= bTreeSearchforDelete(node,object);
+
+		if(del.isLeaf) {
+			//Case 1: The node is a leaf and has number of objects greater than t-1
+			if(del.getNumOfObjects()>degree-1) {
+				for(int i=0;i<del.objects.length;i++) {
+
+					TreeObject obj = del.objects[i];
+
+					if(obj.equals(retVal)) {
+
+
+						if(i==del.objects.length-1) {
+							del.objects[del.getNumOfObjects()-1]=new TreeObject(-1);
+							del.setNumOfObjects(del.getNumOfObjects()-1);	
+						}
+						else {
+							System.out.println("Lala"+i);	
+							for(int j=i;j<del.objects.length-1;j++) {
+								del.objects[j]=del.objects[j+1];
+							}
+							del.objects[del.getNumOfObjects()-1]=new TreeObject(-1);
+							del.setNumOfObjects(del.getNumOfObjects()-1);	
+						}
+					}
+
+				}
+
+				diskWrite(del);
+				System.out.println(del.objects[0]);
+				System.out.println(del.objects[1]);
+				System.out.println(del.objects[2]);
+
+			}
+		}	
+		/*
+		//Case 2a: The node is a leaf and has number of objects greater than t-1
+		else if(!del.isLeaf()) {
+			int index=0;
+			BTreeNode found=null;
+			for(int i=0;i<del.objects.length;i++) {
+
+				TreeObject obj = del.objects[i];
+
+				if(obj.equals(retVal)) {
+					index=i;
+					found=findPredecessor(del,index);
+					if(found!=null&&found.getNumOfObjects()>degree-1) {
+						TreeObject predecessor=null;		
+						predecessor=found.objects[found.getNumOfObjects()-1];
+						for(int j=0;j<found.objects.length;j++) {
+
+							TreeObject ob = del.objects[i];
+
+							if(ob.equals(retVal)) {
+
+								if(i==del.objects.length-1) {
+									del.objects[del.getNumOfObjects()-1]=new TreeObject(-1);
+									del.setNumOfObjects(del.getNumOfObjects()-1);	
+								}
+								else {
+										
+									for(int m=j;m<del.objects.length-1;m++) {
+										del.objects[m]=del.objects[m+1];
+									}
+									del.objects[del.getNumOfObjects()-1]=new TreeObject(-1);
+									del.setNumOfObjects(del.getNumOfObjects()-1);	
+								}
+							}
+
+						}
+
+					}
+					
+					diskWrite(found);
+					diskWrite(del);
+					
+				}
+
+			}
+
+		}
+*/
+	}
 	/**
 	 * 
 	 * The bugging method to print out all the information related to a node
