@@ -89,15 +89,10 @@ public class BTreeCache implements Iterable<BTreeNode>
         double ratio = ((double) getNumHits()) / getNumHitsMiss();
         return ratio;
     }
-
-    public int getSize()
-    {
-        return cacheList.size();
-    }
-
+    
     public boolean isFull()
     {
-        return getSize() == MAX_CACHE_SIZE;
+        return (size == MAX_CACHE_SIZE);
     }
 
     //The iterator constructor
