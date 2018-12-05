@@ -11,12 +11,12 @@ public class BTreeCache implements Iterable<BTreeNode>
 	 private LinkedList<BTreeNode> cacheList;
 	private int numHits, numMisses;
     private final int MAX_CACHE_SIZE;
-   
+   	private int size;
    
 
     public BTreeCache(int MAX_SIZE)
     {
-        
+        this.size=0;
     	this.MAX_CACHE_SIZE = MAX_SIZE;
         cacheList = new LinkedList<BTreeNode>();
     }
@@ -49,11 +49,16 @@ public class BTreeCache implements Iterable<BTreeNode>
     {
         BTreeNode nodeToReturn = null;
         if (isFull())
-            nodeToReturn = cacheList.removeLast();
-        cacheList.addFirst(nodeToAdd);
-        return nodeToReturn;
+            nodeToReturn = cacheList.removeLast();}
+        
+	cacheList.addFirst(nodeToAdd);
+        size++;
+	return nodeToReturn;
     }
-   
+    public boolean isFull()
+    {
+        return (size == MAX_CACHE_SIZE);
+    }
     public int getNumHitsMiss()
     {
         return numHits + numMisses;
