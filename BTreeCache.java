@@ -48,7 +48,7 @@ public class BTreeCache implements Iterable<BTreeNode>
     public BTreeNode add(BTreeNode nodeToAdd, int offset)
     {
         BTreeNode nodeToReturn = null;
-        if (isFull())
+        if (isFull()){
             nodeToReturn = cacheList.removeLast();}
         
 	cacheList.addFirst(nodeToAdd);
@@ -90,10 +90,6 @@ public class BTreeCache implements Iterable<BTreeNode>
         return ratio;
     }
     
-    public boolean isFull()
-    {
-        return (size == MAX_CACHE_SIZE);
-    }
 
     //The iterator constructor
     @Override
