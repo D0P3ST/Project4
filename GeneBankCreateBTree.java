@@ -177,10 +177,10 @@ public class GeneBankCreateBTree {
 		long endTime = System.currentTimeMillis();
 
 		if(Integer.parseInt(args[0])==0) {
-			System.out.println("The process without the cache took " + ((endTime - startTime)/1000) + " seconds \n");
+			System.out.println("The process without the cache took " + ((endTime - startTime)) + " milliseconds \n");
 		}
 		if(Integer.parseInt(args[0])==1) {
-			System.out.println("The process with the cache took "+ ((endTime - startTime)/1000) + " seconds \n");
+			System.out.println("The process with the cache took "+ ((endTime - startTime)) + " milliseconds \n");
 		}
 	}
 
