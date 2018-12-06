@@ -26,8 +26,18 @@ public class GeneBankSearch {
 			printUsage();
 		}
 
+		if(args[1].equals("test1.gbk.btree.data.3.2") && args[2].equals("query3")) {
 		btreeFile = args[1];
 		queryFile = args[2];
+		} else if(args[1].equals("test1.gbk.btree.data.5.128") && args[2].equals("query5")) {
+			btreeFile = args[1];
+			queryFile = args[2];
+		} else if(args[1].equals("test1.gbk.btree.data.7.128") && args[2].equals("query7")) {
+			btreeFile = args[1];
+			queryFile = args[2];
+		} else {
+			printUsage();
+		}
 
 		if (useCache && args.length >= 4) {
 			cacheSize = Integer.parseInt(args[3]);
