@@ -1,6 +1,6 @@
 /**
  * 
- *
+ * The BTree Data parsing class.
  * 
  */
 public class BTreeData {
@@ -8,7 +8,13 @@ public class BTreeData {
 	public BTreeData(BTree btree){
 
 	}
-	// from long to sequence
+
+	/**
+	 * converts from long to sequence
+	 * @param key
+	 * @param k
+	 * @return bString
+	 */
 	public String longToSeq(long key,int k){
 		String bString = " ";
 		long hold;
@@ -25,13 +31,14 @@ public class BTreeData {
 		return bString;
 	}
 	
-	
-	
-	
-	
-	
 
-	//from sequence to long
+
+	/**
+	 * converts from sequence to long.
+	 * @param input
+	 * @param num
+	 * @return key
+	 */
 	public long seqToLong(String input,int num){
 		long key =0x000000;
 		long pos;
@@ -58,8 +65,11 @@ public class BTreeData {
 		}
 		return key;
 	}
-	/*
-	 * 
+
+	/**
+	 * converts the bin.
+	 * @param key
+	 * @return tmp
 	 */
 	private char convertBin(long key){
 		char tmp = ' ';
