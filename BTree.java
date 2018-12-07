@@ -17,6 +17,12 @@ public class BTree
 	private int bTreeNodeSize;
 	private BTreeCache cache;
 
+	/**
+	 * @param degree
+	 * @param fileName
+	 * @param useCache
+	 * @param cacheSize
+	 */
 	public BTree(int degree, String fileName, boolean useCache, int cacheSize)
 	{
 		bTreeNodeSize = 32 * degree - 3; 
@@ -52,7 +58,14 @@ public class BTree
 
 		writeMetadata();
 	}
-//for the search class
+
+	/**
+	 * for the search class
+	 * @param degree
+	 * @param fileName
+	 * @param useCache
+	 * @param cacheSize
+	 */
 	public BTree(int degree, File fileName, boolean useCache, int cacheSize)
 	{
 
@@ -70,6 +83,9 @@ public class BTree
 		root = readNode(rootOffset);
 	}
 
+	/**
+	 * @param k
+	 */
 	public void bTreeInsert(long k)
 	{
 		BTreeNode r = this.root;
@@ -103,6 +119,10 @@ public class BTree
 			insertNonfull(r, k);
 	}
 
+	/**
+	 * @param x
+	 * @param k
+	 */
 	public void insertNonfull(BTreeNode x, long k)
 	{
 		int i = x.getNumOfObjects();
@@ -167,6 +187,11 @@ public class BTree
 		}
 	}
 
+	/**
+	 * @param x
+	 * @param i
+	 * @param y
+	 */
 	public void splitChild(BTreeNode x, int i, BTreeNode y)
 	{
 		BTreeNode z = new BTreeNode();
@@ -236,6 +261,11 @@ public class BTree
 		}
 	}
 
+	/**
+	 * @param x
+	 * @param k
+	 * @return searchForDel(y, k)
+	 */
 	public BTreeNode searchForDel(BTreeNode x, long k)
 	{
 		int i = 0;
@@ -260,11 +290,17 @@ public class BTree
 		}
 	}
 
+	/**
+	 * @return root
+	 */
 	public BTreeNode getRoot()
 	{
 		return root;
 	}
 
+	/**
+	 * @param n
+	 */
 	public void inOrderPrint(BTreeNode n)
 	{
 		System.out.println(n);
@@ -288,6 +324,12 @@ public class BTree
 		}
 	}
 
+	/**
+	 * @param node
+	 * @param fw
+	 * @param sequenceLength
+	 * @throws IOException
+	 */
 	public void inOrderPrintToWriter(BTreeNode node, FileWriter fw, int sequenceLength) throws IOException
 	{
 		BTreeConvert data = new BTreeConvert();
@@ -318,6 +360,10 @@ public class BTree
 		}
 	}
 
+	/**
+	 * @param n
+	 * @param offset
+	 */
 	public void writeNode(BTreeNode n, int offset)
 	{
 		if (cache != null)
@@ -332,6 +378,10 @@ public class BTree
 		}
 	}
 
+	/**
+	 * @param n
+	 * @param offset
+	 */
 	private void writeNodeToFile(BTreeNode n, int offset)
 	{
 		int i = 0;
@@ -373,6 +423,10 @@ public class BTree
 		}
 	}
 
+	/**
+	 * @param offset
+	 * @return y
+	 */
 	public BTreeNode readNode(int offset)
 	{
 
@@ -432,6 +486,9 @@ public class BTree
 		return y;
 	}
 
+	/**
+	 * writes metadata
+	 */
 	public void writeMetadata()
 	{
 		try
@@ -448,6 +505,9 @@ public class BTree
 		}
 	}
 
+	/**
+	 * reads metadata
+	 */
 	public void readMetadata()
 	{
 		try
@@ -464,6 +524,10 @@ public class BTree
 		}
 	}
 
+	/**
+	 * @param x
+	 * @param offset
+	 */
 	public void writeNodeMetadata(BTreeNode x, int offset)
 	{
 		try
@@ -480,6 +544,9 @@ public class BTree
 		}
 	}
 
+	/**
+	 * flushesCache
+	 */
 	public void flushCache()
 	{
 		if (cache != null)
