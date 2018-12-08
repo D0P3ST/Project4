@@ -79,7 +79,7 @@ public class BTreeTester {
 		} catch (Exception e) {
 			System.out.println("Test Failed" + '\n');
 		}
-		//Test Insert 20
+		// Test Insert 20
 		numTest++;
 		try {
 			if (testTreeInsert(testTree, 20, "Insert 20")) {
@@ -96,7 +96,7 @@ public class BTreeTester {
 		numTest++;
 		System.out.println("Test for search 1");
 		TreeObject testObject = new TreeObject(1);
-		if (testTree.search(testTree.getRoot(), testObject.getKey()) == testObject) {
+		if (testTree.search(testTree.getRoot(), testObject.getData()) == testObject) {
 			System.out.println("Test Passed" + '\n');
 			testPassed++;
 		} else {
@@ -107,7 +107,7 @@ public class BTreeTester {
 		numTest++;
 		System.out.println("Test for search 10");
 		testObject = new TreeObject(10);
-		if (testTree.search(testTree.getRoot(), testObject.getKey()) == testObject) {
+		if (testTree.search(testTree.getRoot(), testObject.getData()) == testObject) {
 			System.out.println("Test Failed" + '\n');
 
 		} else {
@@ -122,7 +122,7 @@ public class BTreeTester {
 		} else {
 			System.out.println("Test Failed " + '\n');
 		}
-		//Test delete 0
+		// Test delete 0
 		numTest++;
 		if (testTreeRemove(testTree, 0, "Test remove 0")) {
 			System.out.println("Test Passed " + '\n');
@@ -130,7 +130,7 @@ public class BTreeTester {
 		} else {
 			System.out.println("Test Failed " + '\n');
 		}
-		//test delete 20
+		// test delete 20
 		numTest++;
 		if (testTreeRemove(testTree, 20, "Test remove 20")) {
 			System.out.println("Test Passed " + '\n');
@@ -142,21 +142,20 @@ public class BTreeTester {
 		numTest++;
 		if (testTreeRemove(testTree, 15, "Test remove 15")) {
 			System.out.println("Test Failed " + '\n');
-			
+
 		} else {
 			System.out.println("Test Passed " + '\n');
 			testPassed++;
 		}
-		//Test search for del 3
+		// Test search for del 3
 		numTest++;
-		if(testTree.searchForDel(testTree.getRoot(), 3).equals(testObject)) {
+		if (testTree.searchForDel(testTree.getRoot(), 3).equals(testObject)) {
 			System.out.println("Test Passed " + '\n');
 			testPassed++;
-		}
-		else {
+		} else {
 			System.out.println("Test Failed " + '\n');
 		}
-		//test get root
+		// test get root
 		System.out.println("Test to see if the get root matches the printed root " + testTree.getRoot());
 		System.out.println("Test Tree after all deletes " + testTree);
 		System.out.println("Test taken: " + numTest + " Test Passed: " + testPassed + " Percent passed: "
@@ -175,7 +174,7 @@ public class BTreeTester {
 		TreeObject practiceObject = new TreeObject(key);
 		System.out.println("Test Insert : " + testName);
 		try {
-			testTree.bTreeInsert(practiceObject.getKey());
+			testTree.bTreeInsert(practiceObject.getData());
 			return true;
 
 		} catch (Exception e) {
@@ -196,9 +195,12 @@ public class BTreeTester {
 		TreeObject practiceObject = new TreeObject(key);
 		System.out.println("Test Remove " + testName);
 
-		if (testTree.delete(practiceObject) != null) {
+		try {
+			testTree.delete(testTree.getRoot(), practiceObject);
 			return true;
-		} else {
+		}
+
+		catch (Exception c) {
 			System.out.println("Object not found");
 			return false;
 		}
