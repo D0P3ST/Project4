@@ -16,6 +16,7 @@ public class BTree
 	private int rootOffset;
 	private int bTreeNodeSize;
 	private BTreeCache cache;
+	private int numNodes;
 
 	/**
 	 * @param degree
@@ -28,6 +29,7 @@ public class BTree
 		bTreeNodeSize = 32 * degree - 3; 
 		rootOffset = 12;
 		placeToInsert = rootOffset + bTreeNodeSize;
+		numNodes = 1;
 
 		this.degree = degree;
 		if (useCache)
@@ -68,7 +70,7 @@ public class BTree
 	 */
 	public BTree(int degree, File fileName, boolean useCache, int cacheSize)
 	{
-
+		numNodes = 1;
 		try
 		{
 			file = new RandomAccessFile(fileName, "rw");
@@ -110,6 +112,7 @@ public class BTree
 				r.setOffset(placeToInsert);
 				r.setParent(s.getOffset());
 				s.setIsLeaf(false);
+				numNodes++;
 				s.addChild(r.getOffset());
 				splitChild(s, 0, r);
 				insertNonfull(s, k);
@@ -236,12 +239,7 @@ public class BTree
 			placeToInsert += bTreeNodeSize;
 		}
 	}
-	
-	/**
-	 * @param x
-	 * @param k
-	 * @return x.object(i)
-	 */
+
 	public TreeObject search(BTreeNode x, long k)
 	{
 		int i = 0;
@@ -568,3 +566,14 @@ public class BTree
 		found=search(x,obj.getData());
 
 	}
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		BTreeNode printNode = root;
+		for(int i =0; i < numNodes; i++) {
+			builder.append(printNode.toString() + '\n');
+			
+		}
+		String printString = builder.toString();
+		return printString;
+	}
+}
