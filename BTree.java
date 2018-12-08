@@ -236,7 +236,12 @@ public class BTree
 			placeToInsert += bTreeNodeSize;
 		}
 	}
-
+	
+	/**
+	 * @param x
+	 * @param k
+	 * @return x.object(i)
+	 */
 	public TreeObject search(BTreeNode x, long k)
 	{
 		int i = 0;
@@ -563,4 +568,3 @@ public class BTree
 		found=search(x,obj.getData());
 
 	}
-}
