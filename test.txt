@@ -1,0 +1,13 @@
+BTreeTester:
+Method: Test tree insert- This method can be used to test any insertion into the btree.
+The parameters are a btree, a key for the object, and a string for the test name.
+
+I used this to test insertion for a few different keys. If the key is inserted, the method
+will return true.
+
+Method: Test tree remove- This method is similar to the insertion method but it removes. The 
+parameters are a btree, a key to be removed, and a string for the test name. I did a few of
+these ass well. 
+
+The last part of each test was to print out the btree and see if the insertion or deletion 
+worked. You will have to view it and make sure that it came out correctly.
