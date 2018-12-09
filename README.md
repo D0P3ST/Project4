@@ -6,6 +6,20 @@ This is the BTree class
 Cache Speed:
 Through testing we dicovered that useing the cache does help with time completion in seemingly all cases, but the size of the cache does not impact that time to completion at all.
 
+$java GeneBankCreateBTree 0 0 test3.gbk 7 1
+It took 20456 milli seconds to complete!
+$java GeneBankCreateBTree 100 0 test3.gbk 7 100 1
+It took 20236 milli seconds to complete!
+$java GeneBankCreateBTree 100 0 test3.gbk 7 500 1
+It took 20201 milli seconds to complete!
+
+$java GeneBankSearch 0 test3.gbk.data.7.128 query7 0
+It took 10856 milli seconds to complete!
+$java GeneBankSearch 1 test3.gbk.data.7.128 query7 100 0
+It took 9015 milli seconds to complete!
+$java GeneBankSearch 1 test3.gbk.data.7.128 query7 500 0
+It took 9002 milli seconds to complete!
+
 Project Files:
 - BTree: The BTree constructor class.
 - BTreeTester: The test class for BTree.
