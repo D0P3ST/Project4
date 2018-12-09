@@ -1,16 +1,35 @@
 BTreeTester:
 Method: Test tree insert- This method can be used to test any insertion into the btree.
 The parameters are a btree, a key for the object, and a string for the test name.
-
 I used this to test insertion for a few different keys. If the key is inserted, the method
 will return true.
 
 Method: Test tree remove- This method is similar to the insertion method but it removes. The 
 parameters are a btree, a key to be removed, and a string for the test name. I did a few of
-these ass well. 
-
+these as well. 
 The last part of each test was to print out the btree and see if the insertion or deletion 
 worked. You will have to view it and make sure that it came out correctly.
 
 BTreeNodeTester
-Method: test number insert- inserts a key value into the node.
+Method: test number insert- inserts a key value into the node with the specified key.
+The parameters are a btreenode, a key to insert, and a string for the test name.
+
+Method: test number remove- removes an object from the node with the specified key. 
+The parameters are a btreenode, a key to delete's index, and a string for the test name.
+
+Method: test set and get parent object- sets a single object's parent of the node & returns 
+a single object's parent from the node. The parameters are a btreenode, a key, a index to set, 
+and a string for the test name.
+
+Method: test set and get child object- sets a single object's child of the node & returns 
+a single object's child from the node. The parameters are a btreenode, a key, a index to set, 
+and a string for the test name.
+
+Method: test set and get offset- Set offset to the given value & returns that offset. 
+The parameters are a btreenode, a key to set, and a string for the test name.
+
+Method: test isleaf and setisleaf- Get a isLeaf and Set isLeaf to the given value. 
+The parameters are a btreenode, a key to set, and a string for the test name.
+
+Method: test set and get numofobjects- Get the NumOfObjects and Set the NumOfObjects to the given value.
+The parameters are a btreenode, a key, a index to set, and a string for the test name.
