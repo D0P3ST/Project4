@@ -35,3 +35,5 @@ Van:
 I felt like this project is kind of hard and it requires a huge amount of time to debug. The most interesting thing I learnt from this project is how to write/read data from a file and use bitwise operations to convert data into binary encoded sequence.
 
 Sean: I worked on all of the test classes with Chris. I felt that the project went pretty smooth. I really wanted to get some more practice in writing test case. I just wish we would have had a little more time to put more tests in. 
+
+Connor:  I focused on the BTreeNode and BTree classes with Van.  While I initially had some failure in designing the BTree due to a misinterpretation, I eventually was able to help her more in the lab later on and the deletion method was mainly left to me.  I'm not 100% confident in its function but I don't think anyone else was comfortable with it either due to the almost convoluted logic.  Also, testing felt very counterintuitive which didn't help the lack of confidence when coding.
